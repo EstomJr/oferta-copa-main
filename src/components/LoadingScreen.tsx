@@ -10,9 +10,7 @@ interface LoadingScreenProps {
 }
 
 const curiosidades = [
-  "A Copa de 2026 será a primeira com 48 seleções! Vai ser histórico!",
-  "O Brasil é o maior campeão mundial com 5 títulos. Rumo ao hexa!",
-  "Pelé marcou 1.283 gols na carreira. O Rei do Futebol!",
+  "España ganó el Mundial de 2010 en Sudáfrica con un gol histórico de Iniesta.",
   "A primeira Copa do Mundo foi em 1930, no Uruguai.",
   "O recorde de gols em uma Copa é de Just Fontaine: 13 gols em 1958.",
   "Ronaldo Fenômeno é o segundo maior artilheiro de Copas com 15 gols.",
@@ -25,8 +23,6 @@ const curiosidades = [
   "A camisa amarela da seleção brasileira foi adotada após a derrota de 1950.",
   "Zagallo foi campeão como jogador (1958 e 1962) e como técnico (1970).",
   "A bola oficial da Copa de 2026 se chama 'adidas Finale 26'.",
-  "Neymar é o segundo maior artilheiro da história da seleção brasileira.",
-  "Djalma Santos foi eleito o melhor lateral-direito de todos os tempos pela FIFA.",
   "O estádio Azteca, no México, é o único que sediou duas finais de Copa.",
 ];
 
@@ -101,14 +97,14 @@ export default function LoadingScreen({ title, gifUrl, longWait, startTime }: Lo
 
         {longWait && (
           <p className="text-sm font-bold text-copa-blue text-center -mt-4" style={{ fontFamily: "var(--font-papernotes)" }}>
-            Não saia dessa tela, leva até 2 minutos.
+            No salgas de esta pantalla, puede tardar hasta 2 minutos.
           </p>
         )}
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={gifUrl}
-          alt="Carregando..."
+          alt="Cargando..."
           className="w-48 h-48 rounded-2xl object-cover"
         />
 
@@ -118,18 +114,18 @@ export default function LoadingScreen({ title, gifUrl, longWait, startTime }: Lo
         >
           {longWait ? (
             <>
-              <span className="text-copa-blue font-bold">Você sabia?</span>{" "}
+              <span className="text-copa-blue font-bold">¿Sabías que?</span>{" "}
               {curiosidades[curiosidadeIndex]}
             </>
           ) : (
-            "Esse tem cara de jogador caro hein"
+            "Este tiene pinta de jugador top"
           )}
         </p>
 
         <div className="w-full">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-bold text-copa-blue" style={{ fontFamily: "var(--font-papernotes)" }}>
-              {longWait && elapsed > 0 ? `${elapsed}s` : "Carregando..."}
+              {longWait && elapsed > 0 ? `${elapsed}s` : "Cargando..."}
             </span>
             <span className="text-sm font-bold text-copa-blue" style={{ fontFamily: "var(--font-papernotes)" }}>
               {percent}%

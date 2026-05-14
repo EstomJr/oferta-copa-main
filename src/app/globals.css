@@ -29,16 +29,16 @@
 @theme inline {
   --font-papernotes: 'Papernotes', cursive;
   --font-titulo: 'CBF', sans-serif;
-  --color-copa-yellow: #FFD700;
-  --color-copa-yellow-light: #FFF3B0;
-  --color-copa-blue: #1E3A8A;
-  --color-copa-blue-hover: #1E40AF;
-  --color-copa-green: #009739;
+  --color-copa-yellow: #FFC400;
+  --color-copa-yellow-light: #FFF4C2;
+  --color-copa-blue: #AA151B;
+  --color-copa-blue-hover: #8F1117;
+  --color-copa-green: #D49D00;
   --color-copa-white: #FFFFFF;
 }
 
 :root {
-  --background: #FFD700;
+  --background: #AA151B;
   --foreground: #1a1a1a;
 }
 
@@ -53,10 +53,10 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFD700;
+  background: #AA151B;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E3A8A;
+  background: #FFC400;
   border-radius: 3px;
 }
 
@@ -67,8 +67,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(30, 58, 138, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(30, 58, 138, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(170, 21, 27, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(170, 21, 27, 0.6); }
 }
 
 @keyframes slide-up {

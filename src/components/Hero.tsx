@@ -13,8 +13,8 @@ export default function Hero({ onStart }: HeroProps) {
         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4 max-w-2xl"
         style={{ fontFamily: "var(--font-titulo)" }}
       >
-        Transforme seu filho em uma{" "}
-        <span className="text-copa-blue">figurinha personalizada</span> da Copa do Mundo
+        Convierte a tu hijo en un{" "}
+        <span className="text-copa-blue">cromo personalizado</span> del Mundial
       </h1>
 
       <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-[400px] mb-2">
@@ -27,14 +27,15 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-helena.png"
-              alt="Figurinha Helena"
+              src="/figurinha-helena-esp.png"
+              alt="Cromo Lucía"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 144px, 192px"
               priority
             />
             <div className="absolute inset-0 shine-effect" />
+            <span className="absolute bottom-2 left-2 bg-black/55 text-white text-xs px-2 py-1 rounded-md">Lucía</span>
           </div>
         </div>
 
@@ -46,14 +47,15 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-miguel.png"
-              alt="Figurinha Miguel"
+              src="/figurinha-miguel-esp.png"
+              alt="Cromo Mateo"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 176px, 240px"
               priority
             />
             <div className="absolute inset-0 shine-effect" style={{ animationDelay: "1s" }} />
+            <span className="absolute bottom-2 left-2 bg-black/55 text-white text-xs px-2 py-1 rounded-md">Mateo</span>
           </div>
         </div>
 
@@ -66,14 +68,15 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-arthur.png"
-              alt="Figurinha Arthur"
+              src="/figurinha-arthur-esp.png"
+              alt="Cromo Sofía"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 144px, 192px"
               priority
             />
             <div className="absolute inset-0 shine-effect" style={{ animationDelay: "2s" }} />
+            <span className="absolute bottom-2 left-2 bg-black/55 text-white text-xs px-2 py-1 rounded-md">Sofía</span>
           </div>
         </div>
       </div>
@@ -82,8 +85,8 @@ export default function Hero({ onStart }: HeroProps) {
         className="text-lg md:text-xl max-w-md mb-4 leading-relaxed"
         style={{ fontFamily: "var(--font-papernotes)" }}
       >
-        Responda algumas perguntas rápidas e veja como criar uma figurinha exclusiva,
-        com o nome, foto e estilo do seu pequeno craque.
+        Responde unas preguntas rápidas y descubre cómo crear un cromo exclusivo
+        con el nombre, la foto y el estilo de tu pequeño crack.
       </p>
 
       <button
@@ -93,12 +96,12 @@ export default function Hero({ onStart }: HeroProps) {
           animate-pulse-glow cursor-pointer tracking-[0.15em]"
         style={{ fontFamily: "var(--font-titulo)" }}
       >
-        INICIAR
+        EMPEZAR
       </button>
 
       <div className="mt-6 flex flex-col items-center gap-2">
         <div className="flex -space-x-2">
-          {["🇧🇷", "🇦🇷", "🇫🇷", "🇩🇪", "🇪🇸"].map((flag, i) => (
+          {["🇪🇸", "🇵🇹", "🇫🇷", "🇮🇹", "🇩🇪"].map((flag, i) => (
             <span
               key={i}
               className="w-10 h-10 rounded-full bg-copa-white flex items-center justify-center text-xl border-2 border-copa-yellow"
@@ -108,7 +111,7 @@ export default function Hero({ onStart }: HeroProps) {
           ))}
         </div>
         <p className="text-sm font-bold" style={{ fontFamily: "var(--font-papernotes)" }}>
-          +2.500 figurinhas já criadas!
+          +2.500 cromos ya creados
         </p>
       </div>
     </section>

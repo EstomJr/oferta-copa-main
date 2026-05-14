@@ -62,7 +62,9 @@ export default function Home() {
   });
   const [genStartTime, setGenStartTime] = useState(0);
   const dataRef = useRef(data);
-  dataRef.current = data;
+  useEffect(() => {
+    dataRef.current = data;
+  }, [data]);
 
   // Salvar UTMs da URL na chegada pra usar no checkout depois
   useEffect(() => {
@@ -195,7 +197,7 @@ export default function Home() {
   }, [quizStep]);
 
   return (
-    <main className="flex flex-col items-center min-h-screen bg-copa-yellow">
+    <main className="flex flex-col items-center min-h-screen bg-copa-blue">
       {appStep === "hero" && (
         <Hero onStart={() => {
           // Limpar sessão anterior
@@ -219,15 +221,15 @@ export default function Home() {
 
       {appStep === "loading-photo" && (
         <LoadingScreen
-          title="CARREGANDO FOTO"
-          gifUrl="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjM0bHRyeHlscG1rM3I3M201d25xenFhbjV1bHlvZ3lsaGdhZ3B0OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WxDZ77xhPXf3i/giphy.gif"
+          title="CARGANDO FOTO"
+          gifUrl="/figurinha-miguel.png"
         />
       )}
 
       {appStep === "loading-generate" && (
         <LoadingScreen
-          title="GERANDO SUA FIGURINHA"
-          gifUrl="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc1dHJ2bnR2eGt6Nnp5OGQ3Ynd2MHY1aWRpcWN5aGE3ejliYjZlayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tkzfoxijYuxNK/giphy.gif"
+          title="GENERANDO TU CROMO"
+          gifUrl="/figurinha-arthur.png"
           longWait
           startTime={genStartTime}
         />
