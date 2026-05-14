@@ -62,7 +62,9 @@ export default function Home() {
   });
   const [genStartTime, setGenStartTime] = useState(0);
   const dataRef = useRef(data);
-  dataRef.current = data;
+  useEffect(() => {
+    dataRef.current = data;
+  }, [data]);
 
   // Salvar UTMs da URL na chegada pra usar no checkout depois
   useEffect(() => {
@@ -220,14 +222,14 @@ export default function Home() {
       {appStep === "loading-photo" && (
         <LoadingScreen
           title="CARGANDO FOTO"
-          gifUrl="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjA4Y2JqNHBocmhyMWVqdnBsM2x6MDRhY3N0MmVvcm56c2VyYjA4diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oEjI6SIIHBdRxXI40/giphy.gif"
+          gifUrl="/figurinha-miguel.png"
         />
       )}
 
       {appStep === "loading-generate" && (
         <LoadingScreen
           title="GENERANDO TU CROMO"
-          gifUrl="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc1dHJ2bnR2eGt6Nnp5OGQ3Ynd2MHY1aWRpcWN5aGE3ejliYjZlayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tkzfoxijYuxNK/giphy.gif"
+          gifUrl="/figurinha-arthur.png"
           longWait
           startTime={genStartTime}
         />

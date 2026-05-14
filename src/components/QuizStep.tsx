@@ -75,6 +75,16 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
     : clubes;
 
   useEffect(() => {
+    if (step !== 3) return;
+    const estimated = getEstimatedGrowth(data.dataNascimento);
+    if (!estimated) return;
+    const next: Partial<QuizData> = {};
+    if (!data.peso) next.peso = String(estimated.peso);
+    if (!data.altura) next.altura = String(estimated.altura);
+    if (Object.keys(next).length > 0) updateData(next);
+  }, [step, data.dataNascimento, data.peso, data.altura, updateData]);
+
+  useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (clubeRef.current && !clubeRef.current.contains(e.target as Node)) setShowClubeList(false);
     };
@@ -279,7 +289,7 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
             {/* Email */}
             <div>
               <label className="block text-sm font-bold mb-1 text-copa-blue" style={{ fontFamily: "var(--font-titulo)" }}>
-                SEU MELHOR E-MAIL
+                TU MEJOR CORREO
               </label>
               <input
                 type="email"
@@ -296,34 +306,30 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
 
         {/* Step 3: Clube + Peso/Altura */}
         {step === 3 && (() => {
-          // Sugestão baseada na idade
           const estimated = getEstimatedGrowth(data.dataNascimento);
-          if (estimated && !data.peso) updateData({ peso: String(estimated.peso) });
-          if (estimated && !data.altura) updateData({ altura: String(estimated.altura) });
-
           return (
           <div className="flex flex-col gap-5">
             <div className="text-center">
               <span className="text-4xl mb-2 block">⭐</span>
               <h2 className="text-2xl md:text-3xl font-black text-copa-blue" style={{ fontFamily: "var(--font-titulo)" }}>
-                CLUBE E DADOS
+                CLUB Y DATOS
               </h2>
               <p className="text-base mt-1 opacity-70" style={{ fontFamily: "var(--font-papernotes)" }}>
-                O clube do coração e os dados pra figurinha
+                El club favorito y los datos para el cromo
               </p>
             </div>
 
             {/* Clube */}
             <div ref={clubeRef} className="relative">
               <label className="block text-sm font-bold mb-1 text-copa-blue" style={{ fontFamily: "var(--font-titulo)" }}>
-                CLUBE DO CORAÇÃO
+                CLUB FAVORITO
               </label>
               <input
                 type="text"
                 value={clubeQuery}
                 onChange={(e) => { const v = sanitize(e.target.value); setClubeQuery(v); updateData({ clube: v }); setShowClubeList(true); }}
                 onFocus={() => setShowClubeList(true)}
-                placeholder="Digite o nome do clube..."
+                placeholder="Escribe el nombre del club..."
                 maxLength={50}
                 className="w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-copa-blue focus:outline-none transition-colors placeholder:text-gray-400"
                 style={{ fontFamily: "var(--font-papernotes)" }}
@@ -338,8 +344,8 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
                     >{c}</button>
                   )) : (
                     <div className="px-4 py-3 text-center" style={{ fontFamily: "var(--font-papernotes)" }}>
-                      <p className="font-bold text-copa-blue">Clube personalizado</p>
-                      <p className="text-sm text-gray-500">Vamos usar &quot;{clubeQuery}&quot;</p>
+                      <p className="font-bold text-copa-blue">Club personalizado</p>
+                      <p className="text-sm text-gray-500">Usaremos &quot;{clubeQuery}&quot;</p>
                     </div>
                   )}
                 </div>
@@ -381,7 +387,7 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
               </div>
             </div>
             <p className="text-xs text-gray-400 -mt-3" style={{ fontFamily: "var(--font-papernotes)" }}>
-              Sugestão baseada na idade. Altere se quiser.
+              Sugerencia basada en la edad. Cámbialo si quieres.
             </p>
           </div>
           );
@@ -393,13 +399,13 @@ export default function QuizStep({ step, data, updateData, onNext, onBack, total
             <button onClick={onBack}
               className="flex-1 px-6 py-4 rounded-xl border-2 border-copa-blue text-copa-blue font-bold hover:bg-copa-blue hover:text-copa-white transition-all duration-200 cursor-pointer tracking-[0.15em]"
               style={{ fontFamily: "var(--font-titulo)" }}
-            >VOLTAR</button>
+            >VOLVER</button>
           )}
           <button onClick={handleNext}
             className="flex-1 bg-copa-blue text-copa-white font-bold text-lg px-6 py-4 rounded-xl shadow-lg hover:bg-copa-blue-hover active:scale-95 transition-all duration-200 cursor-pointer tracking-[0.15em]"
             style={{ fontFamily: "var(--font-titulo)" }}
           >
-            {step === totalSteps ? "GERAR FIGURINHA ⚽" : "PRÓXIMO →"}
+            {step === totalSteps ? "GENERAR CROMO ⚽" : "SIGUIENTE →"}
           </button>
         </div>
       </div>

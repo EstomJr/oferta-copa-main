@@ -29,7 +29,7 @@
 @theme inline {
   --font-papernotes: 'Papernotes', cursive;
   --font-titulo: 'CBF', sans-serif;
-  --color-copa-yellow: #F1BF00;
+  --color-copa-yellow: #FFC400;
   --color-copa-yellow-light: #FFF4C2;
   --color-copa-blue: #AA151B;
   --color-copa-blue-hover: #8F1117;
@@ -38,7 +38,7 @@
 }
 
 :root {
-  --background: #F1BF00;
+  --background: #AA151B;
   --foreground: #1a1a1a;
 }
 
@@ -53,7 +53,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1BF00;
+  background: #AA151B;
 }
 ::-webkit-scrollbar-thumb {
   background: #AA151B;
