@@ -29,16 +29,16 @@
 @theme inline {
   --font-papernotes: 'Papernotes', cursive;
   --font-titulo: 'CBF', sans-serif;
-  --color-copa-yellow: #C8102E;
-  --color-copa-yellow-light: #FDECEF;
+  --color-copa-yellow: #F1BF00;
+  --color-copa-yellow-light: #FFF4C2;
   --color-copa-blue: #AA151B;
   --color-copa-blue-hover: #8F1117;
-  --color-copa-green: #F1BF00;
+  --color-copa-green: #D49D00;
   --color-copa-white: #FFFFFF;
 }
 
 :root {
-  --background: #C8102E;
+  --background: #F1BF00;
   --foreground: #1a1a1a;
 }
 
@@ -53,7 +53,7 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #C8102E;
+  background: #F1BF00;
 }
 ::-webkit-scrollbar-thumb {
   background: #AA151B;
