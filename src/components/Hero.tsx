@@ -27,7 +27,7 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-helena.png"
+              src="/figurinha-helena-esp.png"
               alt="Cromo Lucía"
               fill
               className="object-cover"
@@ -47,7 +47,7 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-miguel.png"
+              src="/figurinha-miguel-esp.png"
               alt="Cromo Mateo"
               fill
               className="object-cover"
@@ -68,7 +68,7 @@ export default function Hero({ onStart }: HeroProps) {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-arthur.png"
+              src="/figurinha-arthur-esp.png"
               alt="Cromo Sofía"
               fill
               className="object-cover"
