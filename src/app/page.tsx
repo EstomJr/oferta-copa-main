@@ -219,14 +219,14 @@ export default function Home() {
 
       {appStep === "loading-photo" && (
         <LoadingScreen
-          title="CARREGANDO FOTO"
-          gifUrl="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjM0bHRyeHlscG1rM3I3M201d25xenFhbjV1bHlvZ3lsaGdhZ3B0OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WxDZ77xhPXf3i/giphy.gif"
+          title="CARGANDO FOTO"
+          gifUrl="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjA4Y2JqNHBocmhyMWVqdnBsM2x6MDRhY3N0MmVvcm56c2VyYjA4diZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oEjI6SIIHBdRxXI40/giphy.gif"
         />
       )}
 
       {appStep === "loading-generate" && (
         <LoadingScreen
-          title="GERANDO SUA FIGURINHA"
+          title="GENERANDO TU CROMO"
           gifUrl="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXc1dHJ2bnR2eGt6Nnp5OGQ3Ynd2MHY1aWRpcWN5aGE3ejliYjZlayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/tkzfoxijYuxNK/giphy.gif"
           longWait
           startTime={genStartTime}
