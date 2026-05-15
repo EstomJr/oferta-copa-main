@@ -31,8 +31,8 @@
   --font-titulo: 'CBF', sans-serif;
   --color-copa-yellow: #FFC400;
   --color-copa-yellow-light: #FFF4C2;
-  --color-copa-blue: #AA151B;
-  --color-copa-blue-hover: #8F1117;
+  --color-copa-blue: #FFC400;
+  --color-copa-blue-hover: #E0AB00;
   --color-copa-green: #D49D00;
   --color-copa-white: #FFFFFF;
 }
@@ -67,8 +67,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(170, 21, 27, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(170, 21, 27, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 196, 0, 0.35); }
+  50% { box-shadow: 0 0 40px rgba(255, 196, 0, 0.65); }
 }
 
 @keyframes slide-up {
