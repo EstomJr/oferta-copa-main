@@ -48,6 +48,10 @@ body {
   font-family: 'Papernotes', cursive;
 }
 
+.hero-foreground {
+  --foreground: #FFFFFF;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

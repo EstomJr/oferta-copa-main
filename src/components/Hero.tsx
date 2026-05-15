@@ -8,7 +8,7 @@ interface HeroProps {
 
 export default function Hero({ onStart }: HeroProps) {
   return (
-    <section className="flex flex-col items-center min-h-[100dvh] w-full px-5 py-8 text-center overflow-hidden justify-between">
+    <section className="hero-foreground flex flex-col items-center min-h-[100dvh] w-full px-5 py-8 text-center overflow-hidden justify-between">
       <h1
         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4 max-w-2xl"
         style={{ fontFamily: "var(--font-titulo)" }}
