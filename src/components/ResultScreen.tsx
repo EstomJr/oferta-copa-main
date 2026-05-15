@@ -83,10 +83,10 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
             className="text-2xl font-bold text-copa-blue mb-2"
             style={{ fontFamily: "var(--font-titulo)" }}
           >
-            ERRO DE CONEXÃO
+            ERROR DE CONEXIÓN
           </h2>
           <p className="text-base text-gray-600 mb-6" style={{ fontFamily: "var(--font-papernotes)" }}>
-            Verifique sua conexão e clique no botão abaixo.
+            Verifica tu conexión y pulsa el botón de abajo.
           </p>
           <button
             onClick={onRetry}
@@ -94,7 +94,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
               shadow-lg hover:bg-copa-blue-hover active:scale-95 transition-all duration-200 cursor-pointer tracking-[0.1em]"
             style={{ fontFamily: "var(--font-titulo)" }}
           >
-            TENTAR NOVAMENTE
+            INTENTAR DE NUEVO
           </button>
         </div>
       ) : (
@@ -107,7 +107,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={stickerUrl}
-              alt="Figurinha personalizada"
+              alt="Cromo personalizado"
               className="w-full aspect-[2/3] object-cover"
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
@@ -128,7 +128,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
                   </p>
                   <p className="text-white text-[9px] font-bold tracking-widest whitespace-nowrap mt-1"
                     style={{ fontFamily: "var(--font-papernotes)", textShadow: "1px 1px 3px rgba(0,0,0,0.3)", opacity: 0.25 }}>
-                    minha-figurinha-copa2026 &nbsp;&nbsp; minha-figurinha-copa2026 &nbsp;&nbsp; minha-figurinha-copa2026
+                    mi-cromo-mundial2026 &nbsp;&nbsp; mi-cromo-mundial2026 &nbsp;&nbsp; mi-cromo-mundial2026
                   </p>
                 </div>
               ))}
@@ -150,7 +150,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
             className="text-lg md:text-xl text-copa-blue text-center font-bold mb-2"
             style={{ fontFamily: "var(--font-papernotes)" }}
           >
-            Sua figurinha está pronta!
+            ¡Tu cromo está listo!
           </p>
 
           {/* Descrição */}
@@ -158,7 +158,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
             className="text-base text-gray-600 text-center mb-6"
             style={{ fontFamily: "var(--font-papernotes)" }}
           >
-            Receba o arquivo <strong>DIGITAL</strong> para a <strong>IMPRESSÃO</strong>
+            Recibe el archivo <strong>DIGITAL</strong> para <strong>IMPRIMIR</strong>
           </p>
 
           {/* Preço centralizado com brilho */}
@@ -166,7 +166,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
             className="text-5xl md:text-6xl text-copa-green text-center mb-6 relative inline-block shine-effect"
             style={{ fontFamily: "'Montserrat', Arial Black, sans-serif", fontWeight: 900 }}
           >
-            R$12,90
+            12,90 €
           </p>
 
           {/* Botão */}
@@ -176,7 +176,7 @@ export default function ResultScreen({ stickerUrl, stickerId, onRetry }: ResultS
               shadow-lg hover:bg-copa-blue-hover active:scale-95 transition-all duration-200 cursor-pointer tracking-[0.15em]"
             style={{ fontFamily: "var(--font-titulo)" }}
           >
-            RECEBER MINHA FIGURINHA
+            RECIBIR MI CROMO
           </button>
         </div>
       )}
