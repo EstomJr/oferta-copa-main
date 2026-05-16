@@ -62,9 +62,10 @@ function sanitizeInput(value: string, maxLen: number): string {
 
 export async function POST(req: NextRequest) {
   const apiKey = process.env.OPENAI_API_KEY || process.env.GPT_IMAGE_API_KEY;
-  const canPersist = Boolean(process.env.DATABASE_URL && process.env.BLOB_READ_WRITE_TOKEN);
   const missingEnv = [
     ...(apiKey ? [] : ["OPENAI_API_KEY|GPT_IMAGE_API_KEY"]),
+    ...(process.env.DATABASE_URL ? [] : ["DATABASE_URL"]),
+    ...(process.env.BLOB_READ_WRITE_TOKEN ? [] : ["BLOB_READ_WRITE_TOKEN"]),
   ];
 
   if (missingEnv.length > 0) {
