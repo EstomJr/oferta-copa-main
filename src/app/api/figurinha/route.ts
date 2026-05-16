@@ -61,9 +61,19 @@ function sanitizeInput(value: string, maxLen: number): string {
 }
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ error: "Serviço indisponível" }, { status: 500 });
+  const apiKey = process.env.OPENAI_API_KEY || process.env.GPT_IMAGE_API_KEY;
+  const missingEnv = [
+    ...(apiKey ? [] : ["OPENAI_API_KEY|GPT_IMAGE_API_KEY"]),
+    ...(process.env.DATABASE_URL ? [] : ["DATABASE_URL"]),
+    ...(process.env.BLOB_READ_WRITE_TOKEN ? [] : ["BLOB_READ_WRITE_TOKEN"]),
+  ];
+
+  if (missingEnv.length > 0) {
+    console.error("Configuração ausente para /api/figurinha:", missingEnv);
+    return NextResponse.json(
+      { error: "Serviço indisponível", missing: missingEnv },
+      { status: 500 }
+    );
   }
 
   // Rate limit por IP
