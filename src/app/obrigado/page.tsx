@@ -41,7 +41,7 @@ export default function Obrigado() {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-miguel.png"
+              src="/figurinha-miguel1.png"
               alt="Figurinha Miguel"
               fill
               className="object-cover"
@@ -60,7 +60,7 @@ export default function Obrigado() {
         >
           <div className="relative w-full h-full">
             <Image
-              src="/figurinha-arthur.png"
+              src="/figurinha-arthur1.png"
               alt="Figurinha Arthur"
               fill
               className="object-cover"
