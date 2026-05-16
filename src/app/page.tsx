@@ -222,14 +222,14 @@ export default function Home() {
       {appStep === "loading-photo" && (
         <LoadingScreen
           title="CARGANDO FOTO"
-          gifUrl="/figurinha-miguel.png"
+          gifUrl="/figurinha-miguel1.png"
         />
       )}
 
       {appStep === "loading-generate" && (
         <LoadingScreen
           title="GENERANDO TU CROMO"
-          gifUrl="/figurinha-arthur.png"
+          gifUrl="/figurinha-arthur1.png"
           longWait
           startTime={genStartTime}
         />

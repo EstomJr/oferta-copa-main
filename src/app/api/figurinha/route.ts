@@ -125,17 +125,21 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Imagem inválida" }, { status: 400 });
   }
 
-  const sql = getDb();
+  const sql = canPersist ? getDb() : null;
   const emailSafe = email ? email.slice(0, 255).trim().toLowerCase() : null;
+
+  if (!canPersist) {
+    console.warn("/api/figurinha sem persistência: faltam DATABASE_URL e/ou BLOB_READ_WRITE_TOKEN. A imagem será gerada sem salvar pedido.");
+  }
 
   // Se é um retry após erro, buscar figurinha criada DEPOIS do erro
   // (pode ter gerado com sucesso mas a conexão caiu antes de retornar)
-  if (errorTimestamp && emailSafe) {
+  if (sql && errorTimestamp && emailSafe) {
     let existing: Record<string, string>[] = [];
     try {
       const ts = new Date(errorTimestamp);
       if (!isNaN(ts.getTime())) {
-        existing = await sql`
+        existing = await sql!`
           SELECT sticker_id, sticker_url FROM pedidos
           WHERE email = ${emailSafe}
             AND sticker_url IS NOT NULL
@@ -219,9 +223,18 @@ The result must look like a real printed collectible sticker card with a properl
       return NextResponse.json({ error: "Falha na geração" }, { status: 422 });
     }
 
-    // Salvar figurinha no Vercel Blob
     const stickerId = randomUUID();
     const stickerBuffer = Buffer.from(imageData.b64_json, "base64");
+
+    if (!canPersist || !sql) {
+      return NextResponse.json({
+        imageBase64: imageData.b64_json,
+        mimeType: "image/png",
+        stickerId,
+      });
+    }
+
+    // Salvar figurinha no Vercel Blob
     const blob = await put(`figurinhas/${stickerId}.png`, stickerBuffer, {
       access: "public",
       contentType: "image/png",
@@ -259,7 +272,7 @@ The result must look like a real printed collectible sticker card with a properl
     }
 
     // Salvar pedido no banco
-    await sql`
+    await sql!`
       INSERT INTO pedidos (nome, data_nascimento, clube, jogador_favorito, peso_estimado, altura_estimada, sticker_id, sticker_url, preview_url, email, status)
       VALUES (${nomeSafe}, ${dataNascimento}, ${clubeSafe}, ${jogadorSafe}, ${pesoFinal + " kg"}, ${alturaFinal + " m"}, ${stickerId}, ${blob.url}, ${previewBlobUrl}, ${emailSafe}, 'pendente')
     `;
