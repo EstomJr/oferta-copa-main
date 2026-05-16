@@ -197,7 +197,7 @@ export default function Home() {
   }, [quizStep]);
 
   return (
-    <main className="flex flex-col items-center min-h-screen bg-[#AA151B]">
+    <main className="flex flex-col items-center min-h-screen bg-[#AA151B] text-[#1a1a1a]">
       {appStep === "hero" && (
         <Hero onStart={() => {
           // Limpar sessão anterior

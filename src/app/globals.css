@@ -29,9 +29,9 @@
 @theme inline {
   --font-papernotes: 'Papernotes', cursive;
   --font-titulo: 'CBF', sans-serif;
-  --color-copa-yellow: #8B0D11;
+  --color-copa-yellow: #FFC400;
   --color-copa-yellow-light: #FFF4C2;
-  --color-copa-blue: #FCB507;
+  --color-copa-blue: #FFC400;
   --color-copa-blue-hover: #E0AB00;
   --color-copa-green: #D49D00;
   --color-copa-white: #FFFFFF;
@@ -39,7 +39,7 @@
 
 :root {
   --background: #AA151B;
-  --foreground: #FFFFFF;
+  --foreground: #1a1a1a;
 }
 
 body {
