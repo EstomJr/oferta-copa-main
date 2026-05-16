@@ -62,10 +62,9 @@ function sanitizeInput(value: string, maxLen: number): string {
 
 export async function POST(req: NextRequest) {
   const apiKey = process.env.OPENAI_API_KEY || process.env.GPT_IMAGE_API_KEY;
+  const canPersist = Boolean(process.env.DATABASE_URL && process.env.BLOB_READ_WRITE_TOKEN);
   const missingEnv = [
     ...(apiKey ? [] : ["OPENAI_API_KEY|GPT_IMAGE_API_KEY"]),
-    ...(process.env.DATABASE_URL ? [] : ["DATABASE_URL"]),
-    ...(process.env.BLOB_READ_WRITE_TOKEN ? [] : ["BLOB_READ_WRITE_TOKEN"]),
   ];
 
   if (missingEnv.length > 0) {
@@ -234,50 +233,55 @@ The result must look like a real printed collectible sticker card with a properl
       });
     }
 
-    // Salvar figurinha no Vercel Blob
-    const blob = await put(`figurinhas/${stickerId}.png`, stickerBuffer, {
-      access: "public",
-      contentType: "image/png",
-    });
-
-    // Criar versão com marca d'água pro preview/email
-    let previewBlobUrl = blob.url; // fallback: usar a original
     try {
-    const resizedBuf = await sharp(stickerBuffer).resize(400).toBuffer();
-    const resMeta = await sharp(resizedBuf).metadata();
-    const w = resMeta.width || 400;
-    const h = resMeta.height || 600;
-    const watermarkSvg = Buffer.from(`
-      <svg width="${w}" height="${h}">
-        <defs>
-          <pattern id="wm" x="0" y="0" width="200" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)">
-            <text x="100" y="40" font-family="Arial" font-size="22" fill="rgba(255,255,255,0.45)" font-weight="900" text-anchor="middle">PREVIEW</text>
-            <text x="10" y="70" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.3)">minha-figurinha-copa2026</text>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#wm)" />
-      </svg>
-    `);
-    const previewBuffer = await sharp(resizedBuf)
-      .composite([{ input: watermarkSvg, blend: "over" }])
-      .jpeg({ quality: 60 })
-      .toBuffer();
-    const previewBlob = await put(`previews/${stickerId}.jpg`, previewBuffer, {
-      access: "public",
-      contentType: "image/jpeg",
-    });
-    previewBlobUrl = previewBlob.url;
-    } catch (wmErr) {
-      console.error("Erro ao criar preview com marca dagua:", wmErr);
+      // Salvar figurinha no Vercel Blob
+      const blob = await put(`figurinhas/${stickerId}.png`, stickerBuffer, {
+        access: "public",
+        contentType: "image/png",
+      });
+
+      // Criar versão com marca d'água pro preview/email
+      let previewBlobUrl = blob.url; // fallback: usar a original
+      try {
+        const resizedBuf = await sharp(stickerBuffer).resize(400).toBuffer();
+        const resMeta = await sharp(resizedBuf).metadata();
+        const w = resMeta.width || 400;
+        const h = resMeta.height || 600;
+        const watermarkSvg = Buffer.from(`
+          <svg width="${w}" height="${h}">
+            <defs>
+              <pattern id="wm" x="0" y="0" width="200" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)">
+                <text x="100" y="40" font-family="Arial" font-size="22" fill="rgba(255,255,255,0.45)" font-weight="900" text-anchor="middle">PREVIEW</text>
+                <text x="10" y="70" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.3)">minha-figurinha-copa2026</text>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#wm)" />
+          </svg>
+        `);
+        const previewBuffer = await sharp(resizedBuf)
+          .composite([{ input: watermarkSvg, blend: "over" }])
+          .jpeg({ quality: 60 })
+          .toBuffer();
+        const previewBlob = await put(`previews/${stickerId}.jpg`, previewBuffer, {
+          access: "public",
+          contentType: "image/jpeg",
+        });
+        previewBlobUrl = previewBlob.url;
+      } catch (wmErr) {
+        console.error("Erro ao criar preview com marca dagua:", wmErr);
+      }
+
+      // Salvar pedido no banco
+      await sql!`
+        INSERT INTO pedidos (nome, data_nascimento, clube, jogador_favorito, peso_estimado, altura_estimada, sticker_id, sticker_url, preview_url, email, status)
+        VALUES (${nomeSafe}, ${dataNascimento}, ${clubeSafe}, ${jogadorSafe}, ${pesoFinal + " kg"}, ${alturaFinal + " m"}, ${stickerId}, ${blob.url}, ${previewBlobUrl}, ${emailSafe}, 'pendente')
+      `;
+
+      console.log(`Figurinha salva: ${stickerId}`);
+    } catch (persistErr) {
+      console.error("Erro na persistência (blob/db). Retornando imagem sem salvar pedido:", persistErr);
     }
 
-    // Salvar pedido no banco
-    await sql!`
-      INSERT INTO pedidos (nome, data_nascimento, clube, jogador_favorito, peso_estimado, altura_estimada, sticker_id, sticker_url, preview_url, email, status)
-      VALUES (${nomeSafe}, ${dataNascimento}, ${clubeSafe}, ${jogadorSafe}, ${pesoFinal + " kg"}, ${alturaFinal + " m"}, ${stickerId}, ${blob.url}, ${previewBlobUrl}, ${emailSafe}, 'pendente')
-    `;
-
-    console.log(`Figurinha salva: ${stickerId}`);
     return NextResponse.json({
       imageBase64: imageData.b64_json,
       mimeType: "image/png",
